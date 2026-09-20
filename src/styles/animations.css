@@ -1,0 +1,114 @@
+/* ==========================================================================
+   Keyframes + motion primitives
+   GSAP handles anything scroll-driven or sequenced. These are the small,
+   always-on ambient loops and the CSS-only fallbacks.
+   ========================================================================== */
+
+/* Objects sitting on a desk are never perfectly still under a camera —
+   a tiny, slow drift sells "photographed" better than any shadow. */
+@keyframes desk-breathe {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(var(--rot, 0deg));
+  }
+  50% {
+    transform: translate3d(0, -3px, 0) rotate(calc(var(--rot, 0deg) + 0.35deg));
+  }
+}
+
+@keyframes tape-settle {
+  from {
+    opacity: 0;
+    transform: rotate(var(--tape-rot, 0deg)) scaleX(0.2);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(var(--tape-rot, 0deg)) scaleX(1);
+  }
+}
+
+@keyframes blink-dot {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  95% {
+    opacity: 0.15;
+  }
+}
+
+@keyframes dash-march {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+@keyframes sweep-line {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes wiggle-in {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) rotate(calc(var(--rot, 0deg) - 4deg));
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-3px) rotate(calc(var(--rot, 0deg) + 1.2deg));
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(var(--rot, 0deg));
+  }
+}
+
+@keyframes cursor-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.18);
+  }
+}
+
+/* ---- Utility classes ---------------------------------------------------- */
+
+.anim-breathe {
+  animation: desk-breathe var(--breathe-dur, 9s) ease-in-out infinite;
+  animation-delay: var(--breathe-delay, 0s);
+}
+
+.anim-dash {
+  stroke-dasharray: 6 5;
+  animation: dash-march 22s linear infinite;
+}
+
+.anim-blink {
+  animation: blink-dot 1.6s steps(1, end) infinite;
+}
+
+/* Elements GSAP will reveal start hidden, but only when JS is running —
+   .js-ready is set on <html> by main.jsx so no-JS users still see content. */
+.js-ready [data-reveal] {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-breathe,
+  .anim-dash,
+  .anim-blink {
+    animation: none !important;
+  }
+  .js-ready [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

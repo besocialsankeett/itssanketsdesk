@@ -1,0 +1,99 @@
+.work {
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------- header -------------------------------------------------------- */
+.work__head {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  align-items: end;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  margin-bottom: clamp(2.5rem, 6vw, 5rem);
+}
+
+.work__tag {
+  margin-bottom: 1.4rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--track-label);
+}
+
+.work__heading {
+  color: var(--paper);
+  text-shadow: 3px 4px 0 rgba(10, 30, 22, 0.32);
+}
+
+.work__head-side {
+  padding-bottom: 0.6rem;
+}
+
+.work__count {
+  color: var(--yellow);
+  margin-bottom: 0.8rem;
+}
+
+.work__blurb {
+  max-width: 32ch;
+  color: rgba(238, 248, 243, 0.76);
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+}
+
+.work__marks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.work__marks li {
+  padding: 0.24rem 0.5rem;
+  border: 1px dashed rgba(233, 255, 244, 0.28);
+  color: rgba(233, 255, 244, 0.42);
+}
+
+/* ---------- grid ---------------------------------------------------------- */
+.work__grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: start;
+  gap: clamp(1.6rem, 3.4vw, 3.2rem) clamp(1.2rem, 2.6vw, 2.4rem);
+}
+
+/* ---------- end rule ------------------------------------------------------ */
+.work__end {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: clamp(3rem, 7vw, 5.5rem);
+  color: rgba(233, 255, 244, 0.42);
+  white-space: nowrap;
+}
+.work__end-rule {
+  flex: 1;
+  height: 1px;
+  background: rgba(233, 255, 244, 0.25);
+}
+
+/* ---------- responsive ---------------------------------------------------- */
+@media (max-width: 1023px) {
+  .work__head {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .work__head-side {
+    padding-bottom: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .work__grid {
+    gap: 2.4rem 0;
+  }
+  .work__end {
+    font-size: 0.5rem;
+    letter-spacing: 0.14em;
+    white-space: normal;
+    text-align: center;
+  }
+}

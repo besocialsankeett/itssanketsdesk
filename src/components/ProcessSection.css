@@ -1,0 +1,226 @@
+.process {
+  position: relative;
+  z-index: 3;
+  padding-block: clamp(2rem, 5vw, 4rem);
+}
+
+.process__panel {
+  padding-block: clamp(3rem, 8vw, 6rem);
+  box-shadow:
+    0 3px 6px rgba(4, 18, 32, 0.35),
+    0 18px 40px rgba(4, 18, 32, 0.3),
+    26px 46px 90px rgba(4, 18, 32, 0.32);
+  /* it is a big sheet laid on the mat, so it gets a slight tilt */
+  transform: rotate(-0.35deg);
+}
+
+.process__inner {
+  position: relative;
+}
+
+/* ---------- header -------------------------------------------------------- */
+.process__head {
+  max-width: 42rem;
+  margin-bottom: clamp(2rem, 5vw, 3.4rem);
+}
+.process__eyebrow {
+  color: rgba(255, 210, 48, 0.85);
+  margin-bottom: 1rem;
+}
+.process__heading {
+  color: #f2f8ff;
+  margin-bottom: 1.1rem;
+}
+.process__intro {
+  max-width: 33rem;
+  color: rgba(207, 228, 255, 0.8);
+  font-size: var(--fs-md);
+  line-height: 1.6;
+}
+
+/* ---------- dimension line ------------------------------------------------ */
+.process__dim {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: clamp(1.6rem, 4vw, 3rem);
+  color: rgba(207, 228, 255, 0.65);
+}
+.process__dim-cap {
+  width: 1px;
+  height: 14px;
+  background: currentColor;
+  flex: none;
+}
+.process__dim-line {
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.55;
+}
+.process__dim-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--track-label);
+  white-space: nowrap;
+}
+
+/* ---------- track --------------------------------------------------------- */
+.process__track {
+  position: relative;
+}
+
+.process__connector {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 26px;
+  width: 100%;
+  height: 60px;
+  pointer-events: none;
+}
+
+.process__steps {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: clamp(0.8rem, 1.8vw, 1.8rem);
+  position: relative;
+  z-index: 2;
+}
+
+.process__step {
+  position: relative;
+  padding-top: 3.4rem;
+}
+
+.process__step-node {
+  position: absolute;
+  top: 22px;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border: 1px solid rgba(190, 222, 255, 0.7);
+  border-radius: 50%;
+  background: var(--blueprint-deep);
+}
+.process__step-node i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--yellow);
+}
+
+.process__step-n {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--track-label);
+  color: rgba(255, 210, 48, 0.85);
+  margin-bottom: 0.35rem;
+}
+
+.process__step-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.05rem, 2.1vw, 1.7rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: #f2f8ff;
+  margin-bottom: 0.55rem;
+}
+
+.process__step-body {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: rgba(207, 228, 255, 0.72);
+}
+
+.process__step-coord {
+  display: block;
+  margin-top: 0.7rem;
+  color: rgba(190, 222, 255, 0.35);
+}
+
+/* ---------- margin note --------------------------------------------------- */
+.process__margin {
+  position: absolute;
+  right: 4%;
+  bottom: -1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  pointer-events: none;
+}
+.process__scrawl {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: rgba(255, 210, 48, 0.75);
+  transform: rotate(-3deg);
+  white-space: nowrap;
+}
+.process__scrawl-arrow {
+  width: 70px;
+  flex: none;
+  transform: rotate(6deg);
+}
+
+/* ==========================================================================
+   Tablet
+   ========================================================================== */
+@media (max-width: 1023px) {
+  .process__steps {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem 1.4rem;
+  }
+  .process__connector {
+    display: none;
+  }
+  .process__step {
+    padding-top: 2rem;
+  }
+  .process__step-node {
+    top: 0;
+  }
+  .process__margin {
+    position: static;
+    justify-content: flex-end;
+    margin-top: 2rem;
+  }
+}
+
+/* ==========================================================================
+   Mobile — the drawing becomes a vertical stack with a rail down the side
+   ========================================================================== */
+@media (max-width: 640px) {
+  .process__panel {
+    transform: none;
+    padding-block: 3rem 6rem;
+  }
+  .process__steps {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-left: 1.6rem;
+    border-left: 1px dashed rgba(190, 222, 255, 0.35);
+  }
+  .process__step {
+    padding-top: 0;
+    padding-bottom: 1.6rem;
+  }
+  .process__step-node {
+    top: 4px;
+    left: -1.6rem;
+    margin-left: -9px;
+  }
+  .process__step-body {
+    font-size: 0.84rem;
+  }
+  .process__dim-label {
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+  }
+  .process__margin {
+    display: none;
+  }
+}

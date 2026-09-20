@@ -1,0 +1,106 @@
+.pre {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-preload);
+}
+
+.pre__sheet {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--blueprint-ink);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+.pre__crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(240px, 46vmin, 460px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  color: rgba(168, 212, 255, 0.28);
+}
+
+.pre__panel {
+  position: relative;
+  width: min(30rem, 84vw);
+  padding: 1.5rem 1.6rem;
+  text-align: left;
+}
+
+.pre__title {
+  color: var(--blueprint-ink);
+  opacity: 0.9;
+}
+
+.pre__rule {
+  display: block;
+  height: 1px;
+  margin: 0.9rem 0;
+  background: rgba(168, 212, 255, 0.45);
+  transform-origin: left center;
+}
+
+.pre__steps {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.pre__step {
+  --tick: 0;
+  display: grid;
+  grid-template-columns: 2.2rem 0.8rem 1fr auto;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.1em;
+}
+
+.pre__step-n {
+  color: rgba(168, 212, 255, 0.6);
+}
+.pre__step-slash {
+  color: rgba(168, 212, 255, 0.35);
+}
+.pre__step-label {
+  color: #eaf3ff;
+  font-weight: 600;
+}
+.pre__step-tick {
+  color: var(--yellow);
+  opacity: var(--tick);
+  transform: scale(calc(0.7 + var(--tick) * 0.3));
+}
+
+.pre__bar {
+  height: 3px;
+  background: rgba(168, 212, 255, 0.2);
+  overflow: hidden;
+}
+.pre__bar-fill {
+  display: block;
+  height: 100%;
+  background: var(--yellow);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.pre__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  color: rgba(168, 212, 255, 0.5);
+}
+
+@media (max-width: 480px) {
+  .pre__panel {
+    padding: 1.2rem;
+  }
+  .pre__meta {
+    font-size: 0.5rem;
+  }
+}

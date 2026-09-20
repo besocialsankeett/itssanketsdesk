@@ -1,0 +1,112 @@
+.obj {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.obj__inner {
+  transform: rotate(var(--rot, 0deg));
+  transform-origin: 50% 50%;
+}
+
+/* --- Shadow tiers -------------------------------------------------------
+   drop-shadow follows the alpha of the SVG, which is the only way to get a
+   real silhouette shadow off a vector object. Two passes maximum: one tight
+   contact shadow, one wide ambient. Any more and it costs a repaint. */
+.obj--sh-paper .obj__inner {
+  filter: drop-shadow(0 1px 1px rgba(10, 24, 18, 0.22)) drop-shadow(3px 6px 10px rgba(10, 24, 18, 0.16));
+}
+.obj--sh-object .obj__inner {
+  filter: drop-shadow(0 2px 2px rgba(8, 20, 15, 0.34)) drop-shadow(7px 13px 22px rgba(8, 20, 15, 0.26));
+}
+.obj--sh-cardboard .obj__inner {
+  filter: drop-shadow(0 3px 3px rgba(10, 24, 18, 0.34)) drop-shadow(11px 20px 34px rgba(10, 24, 18, 0.3));
+}
+.obj--sh-none .obj__inner {
+  filter: none;
+}
+
+/* --- Contact shadow for photographed objects ----------------------------- */
+.obj__ground {
+  position: absolute;
+  left: 4%;
+  right: -6%;
+  top: 6%;
+  bottom: -7%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 50%, rgba(3, 14, 9, 0.5) 0%, rgba(3, 14, 9, 0.28) 38%, transparent 70%);
+  filter: blur(7px);
+  transform: rotate(var(--rot, 0deg));
+  pointer-events: none;
+  z-index: -1;
+}
+.obj--photo .obj__inner {
+  /* photographs get a tighter contact shadow; the ground ellipse does the
+     ambient work so the silhouette shadow can stay crisp */
+  filter: drop-shadow(0 1px 1px rgba(3, 14, 9, 0.45)) drop-shadow(5px 9px 10px rgba(3, 14, 9, 0.3));
+}
+.photo-obj {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* --- Tiny stencilled call-out that sits under an object ------------------ */
+.obj__label {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 8px);
+  color: rgba(240, 255, 248, 0.42);
+  white-space: nowrap;
+}
+
+/* --- Interactive objects (easter eggs) ---------------------------------- */
+.obj--live {
+  pointer-events: auto;
+}
+.obj--live .obj__inner {
+  transition: transform var(--dur-mid) var(--ease-drop), filter var(--dur-mid) var(--ease-drop);
+}
+.obj--live:hover .obj__inner,
+.obj--live:focus-visible .obj__inner {
+  transform: rotate(var(--rot, 0deg)) scale(1.045) translateY(-3px);
+}
+.obj--live:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 6px;
+  border-radius: 4px;
+}
+
+/* --- Breakpoint opt-outs ------------------------------------------------ */
+@media (max-width: 767px) {
+  .obj--hide-mobile {
+    display: none;
+  }
+}
+@media (max-width: 1023px) {
+  .obj--hide-tablet {
+    display: none;
+  }
+}
+@media (min-width: 1024px) {
+  .obj--hide-desktop {
+    display: none;
+  }
+}
+/* mobile-only objects: the phone desk is its own composition */
+@media (min-width: 768px) {
+  .obj--hide-above-mobile {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .obj {
+    will-change: auto;
+  }
+}

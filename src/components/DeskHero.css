@@ -1,0 +1,658 @@
+/* ==========================================================================
+   THE DESK — hero
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  /* objects along the bottom edge (ruler, earphones) hang over into the next
+     section instead of being sliced; the body clips the horizontal bleed */
+  overflow: visible;
+  isolation: isolate;
+}
+
+/* ---------- L1 · cutting mat --------------------------------------------- */
+.hero__mat {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-mat);
+}
+
+/* Camera: one soft key light from the upper-left, falloff to the lower
+   right, and the gentle darkening a wide lens gives the corners. */
+.hero__mat-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(90% 70% at 24% 14%, rgba(255, 255, 240, 0.13), transparent 58%),
+    radial-gradient(120% 100% at 76% 96%, rgba(0, 0, 0, 0.36), transparent 62%),
+    radial-gradient(140% 140% at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.28) 100%);
+}
+
+/* Wear: years of cutting. Faded patches where the surface has been used
+   most, a slightly lighter band where something used to sit, scuffs. */
+.hero__mat-wear {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(38% 30% at 42% 52%, rgba(255, 255, 240, 0.07), transparent 70%),
+    radial-gradient(26% 22% at 68% 30%, rgba(255, 255, 240, 0.05), transparent 70%),
+    radial-gradient(20% 34% at 12% 78%, rgba(0, 0, 0, 0.07), transparent 70%),
+    linear-gradient(112deg, transparent 0 41%, rgba(255, 255, 240, 0.035) 41.2% 46%, transparent 46.2%);
+}
+
+.hero__mat-grain {
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain-url);
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+}
+
+.hero__mat-guides {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- L2 · blueprint sheet ----------------------------------------- */
+/* An A3 blue grid mat (42 × 30 cm → ~1000 × 720 px at desk scale), lying
+   under the left half of the desk. The paper type sits on it; the laptop
+   sits beside it on the green. */
+.hero__sheet {
+  position: absolute;
+  left: 19%;
+  top: 33%;
+  width: min(62vw, 66rem);
+  aspect-ratio: 420 / 297;
+  z-index: 8;
+  transform: rotate(-2.4deg);
+  box-shadow:
+    0 2px 4px rgba(6, 20, 34, 0.3),
+    0 14px 30px rgba(6, 20, 34, 0.28),
+    24px 40px 70px rgba(6, 20, 34, 0.3);
+  cursor: pointer;
+}
+.hero__sheet::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(200deg, rgba(255, 255, 255, 0.1), transparent 40%);
+}
+.hero__sheet-marks {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- scene -------------------------------------------------------- */
+.hero__scene {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+
+/* ---------- printed photos — Instax-style prints -------------------------
+   Real instant film: a glossy image window in a slightly warm card, thin
+   side borders, a deep bottom border, and a card that is thick enough to
+   cast its own edge. */
+.hero__photo {
+  position: relative;
+  padding: 5.5% 5.5% 20%;
+  background: linear-gradient(168deg, #fefdf9 0%, #f4f1e8 55%, #e9e4d6 100%);
+  border-radius: 2px;
+  /* card thickness: a hairline of lit edge on top-left, dark edge bottom-right */
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset -1px -1px 0 rgba(120, 110, 90, 0.28),
+    0 1px 1px rgba(20, 14, 6, 0.28),
+    0 3px 4px rgba(20, 14, 6, 0.16),
+    4px 8px 14px rgba(20, 14, 6, 0.16);
+}
+.hero__photo::after {
+  /* paper grain over the card, not the image */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain-url);
+  opacity: 0.09;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  border-radius: 2px;
+}
+.hero__photo img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: #101014;
+  /* the image sits fractionally below the card surface */
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35), inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  filter: contrast(1.04) saturate(0.96);
+}
+.hero__photo figcaption {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: 7%;
+  color: var(--ink-faint);
+  text-align: center;
+  font-size: 0.5rem;
+}
+.hero__photo-pin {
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  width: 20px;
+  margin-left: -10px;
+  z-index: 2;
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.4));
+}
+
+/* ---------- torn page of thumbnails --------------------------------------- */
+.hero__scrap {
+  position: relative;
+  padding: 1.1rem 0.7rem 0.9rem;
+}
+.hero__scrap-tape {
+  width: 46px;
+  height: 17px;
+  top: -8px;
+  left: 50%;
+  margin-left: -23px;
+  transform: rotate(-6deg);
+}
+.hero__scrap-head {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: var(--ink-faint);
+  font-size: 0.44rem;
+}
+.hero__scrap-grid {
+  width: 100%;
+  height: auto;
+}
+.hero__scrap-foot {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--red);
+  font-size: 0.44rem;
+}
+
+/* ==========================================================================
+   L6 · Typography
+   ========================================================================== */
+
+/* The name is the hero. It owns the centre of the frame; the desk objects
+   live at the edges and never cross it. */
+.hero__type {
+  position: absolute;
+  left: 50%;
+  top: 51%;
+  transform: translate(-50%, -50%);
+  width: min(64rem, 80%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: var(--z-type);
+  pointer-events: none;
+}
+.hero__type > * {
+  pointer-events: auto;
+}
+
+.hero__heading {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: clamp(1.1rem, 2.4vw, 2rem);
+}
+
+/* --- "HI, I'M" ----------------------------------------------------------- */
+.hero__hi {
+  display: inline-block;
+  padding: 0.4rem 0.9rem 0.5rem;
+  margin-left: -34%;
+  transform: rotate(-3.2deg);
+  font-family: var(--font-mono);
+  font-size: clamp(0.7rem, 1.5vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  color: var(--ink-soft);
+}
+
+/* --- SANKET on cardboard ------------------------------------------------- */
+.hero__name {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: -0.35rem;
+}
+
+.hero__name-card {
+  position: relative;
+  display: inline-block;
+  padding: 0.16em 0.34em 0.2em;
+  transform: rotate(-1.1deg);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(3.2rem, 12vw, 10.8rem);
+  line-height: 0.82;
+  letter-spacing: -0.045em;
+  color: #3d2708;
+  text-shadow: 0 1px 0 rgba(255, 236, 205, 0.45);
+}
+
+.hero__name-tape {
+  width: 62px;
+  height: 22px;
+  top: -11px;
+  left: 12%;
+  transform: rotate(-14deg);
+}
+
+.hero__dot {
+  display: block;
+  width: clamp(0.7rem, 1.7vw, 1.35rem);
+  aspect-ratio: 1;
+  margin-bottom: 0.42em;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow:
+    inset -2px -2px 4px rgba(0, 0, 0, 0.28),
+    0 2px 5px rgba(20, 10, 4, 0.34);
+}
+
+/* --- ATHAWALE — embossed label tape --------------------------------------
+   The cardboard SANKET above is warm, hand-cut and loud. This is the reply:
+   cold, machine-made, precisely punched. The contrast is the point, so it
+   does not compete on size — it sits underneath and to the right, like a
+   label stuck on after the fact. */
+.hero__last {
+  display: block;
+  margin-top: 0.6rem;
+  margin-left: clamp(1rem, 9vw, 7rem);
+}
+
+.hero__last-tape {
+  position: relative;
+  display: inline-block;
+  padding: 0.55em 0.95em 0.6em;
+  transform: rotate(1.6deg);
+  border-radius: 4px;
+  background: linear-gradient(176deg, #3a3d45 0%, #22242a 46%, #131419 100%);
+  color: #f6f3ea;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: clamp(1rem, 3vw, 2.5rem);
+  line-height: 1;
+  letter-spacing: 0.36em;
+  /* the tracking adds a trailing gap; pull it back so the tape looks even */
+  text-indent: 0.36em;
+  text-transform: uppercase;
+  /* raised characters: dark below, faint light above */
+  text-shadow:
+    0 -1px 0 rgba(0, 0, 0, 0.75),
+    0 1px 0 rgba(255, 255, 255, 0.16);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.13),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.55),
+    0 1px 2px rgba(6, 16, 12, 0.4),
+    4px 8px 18px rgba(6, 16, 12, 0.3);
+}
+/* the tape is embossed, so its edges catch a rim of light */
+.hero__last-tape::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+/* --- the four statements ------------------------------------------------- */
+.hero__statement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  margin-bottom: clamp(1rem, 2.2vw, 1.7rem);
+}
+
+.hero__line {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.26rem 0.85rem 0.32rem 0.6rem;
+  /* each strip a little off-centre from the last — a dealt stack */
+  transform: translateX(calc((var(--i) - 1.5) * clamp(0.6rem, 1.6vw, 1.4rem))) rotate(var(--rot));
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(0.9rem, 2.15vw, 1.65rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.hero__line-n {
+  color: var(--red);
+  font-size: 0.5rem;
+}
+
+/* --- role + sticky ------------------------------------------------------- */
+.hero__meta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: clamp(0.9rem, 3vw, 2.4rem);
+  flex-wrap: wrap;
+}
+
+.hero__role {
+  display: inline-block;
+  padding: 0.42rem 0.8rem;
+  background: rgba(10, 26, 20, 0.5);
+  border: 1px solid rgba(233, 255, 244, 0.22);
+  color: rgba(240, 255, 248, 0.88);
+  backdrop-filter: blur(3px);
+  border-radius: 1px;
+}
+
+.hero__sticky {
+  position: relative;
+  width: clamp(7.5rem, 12vw, 9.5rem);
+  padding: 1.4rem 0.8rem 0.9rem;
+  transform: rotate(3.4deg);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(0.72rem, 1.4vw, 0.95rem);
+  line-height: 1.16;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+.hero__sticky .t-micro {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.8rem;
+  color: rgba(58, 44, 0, 0.5);
+}
+
+/* ==========================================================================
+   L7 · Annotations
+   ========================================================================== */
+
+.hero__note {
+  position: absolute;
+  color: rgba(233, 255, 244, 0.4);
+  z-index: var(--z-annotation);
+  pointer-events: none;
+  white-space: nowrap;
+}
+.hero__note--a {
+  left: 1.1rem;
+  top: 46%;
+}
+.hero__note--b {
+  right: 1.8rem;
+  top: 55%;
+  color: rgba(233, 255, 244, 0.45);
+}
+.hero__note--c {
+  left: 30%;
+  bottom: 5%;
+  color: rgba(255, 210, 48, 0.5);
+}
+.hero__note--d {
+  right: 8%;
+  top: 4%;
+  transform: rotate(90deg);
+  transform-origin: right top;
+}
+
+.hero__arrow {
+  /* retired — at photographic scale a drawn arrow reads as a sticker */
+  display: none;
+}
+
+/* ---------- scroll cue ---------------------------------------------------- */
+.hero__scroll {
+  position: absolute;
+  right: 1.6rem;
+  bottom: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.7rem 0.5rem;
+  background: rgba(6, 22, 16, 0.55);
+  border-radius: 3px;
+  backdrop-filter: blur(3px);
+  color: rgba(233, 255, 244, 0.78);
+  z-index: var(--z-annotation);
+}
+.hero__scroll-track {
+  position: relative;
+  width: 1px;
+  height: 38px;
+  background: rgba(233, 255, 244, 0.22);
+  overflow: hidden;
+}
+.hero__scroll-track i {
+  position: absolute;
+  inset: 0;
+  background: var(--yellow);
+  animation: sweep-line 1.9s ease-in-out infinite;
+}
+
+/* ---------- easter eggs --------------------------------------------------- */
+.hero__egg {
+  position: absolute;
+  left: 50%;
+  bottom: 5.5rem;
+  transform: translateX(-50%);
+  z-index: var(--z-annotation);
+  pointer-events: none;
+}
+.hero__egg-chip {
+  display: inline-block;
+  padding: 0.5rem 0.95rem;
+  background: var(--yellow);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--track-label);
+  box-shadow: var(--sh-card);
+  transform: rotate(-1.2deg);
+  animation: wiggle-in 0.45s var(--ease-drop) both;
+}
+
+/* ==========================================================================
+   Tablet
+   ========================================================================== */
+@media (max-width: 1023px) {
+  /* Tablet is a portrait frame: the name stays centred, the objects move to
+     the corners so nothing crosses it. */
+  .hero__type {
+    width: min(38rem, 88%);
+    top: 50%;
+  }
+  .hero__headphones {
+    width: 44vw !important;
+    left: -12% !important;
+    top: -10% !important;
+  }
+  .hero__macbook {
+    width: 66vw !important;
+    left: 48% !important;
+    top: 72% !important;
+  }
+  .hero__phone {
+    width: 17vw !important;
+    left: 80% !important;
+    top: 4% !important;
+  }
+  .hero__print1 {
+    width: 20vw !important;
+    left: 2% !important;
+    top: 34% !important;
+  }
+  .hero__print2 {
+    width: 20vw !important;
+    left: 78% !important;
+    top: 46% !important;
+  }
+  .hero__cutter {
+    width: 8.5vw !important;
+    left: 50% !important;
+    top: 6% !important;
+  }
+  .hero__earphones {
+    left: 6% !important;
+    top: 80% !important;
+  }
+  .hero__ruler {
+    top: 92% !important;
+    left: 30% !important;
+  }
+  .hero__sheet {
+    width: 84vw;
+    left: 8%;
+    top: 30%;
+  }
+  .hero__arrow {
+    display: none;
+  }
+}
+
+/* ---------- shadows that scale with the mass of the object ---------------- */
+.hero__macbook .obj__inner {
+  filter: drop-shadow(0 2px 2px rgba(3, 14, 9, 0.5)) drop-shadow(12px 22px 26px rgba(3, 14, 9, 0.36));
+}
+.hero__macbook .obj__ground {
+  inset: 8% -9% -10% 3%;
+  filter: blur(18px);
+  background: radial-gradient(ellipse at 50% 50%, rgba(3, 14, 9, 0.55) 0%, rgba(3, 14, 9, 0.3) 45%, transparent 72%);
+}
+/* the phone lies on the lid, so its shadow is tight and falls on the laptop */
+.hero__phone .obj__inner {
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.55)) drop-shadow(4px 7px 8px rgba(0, 0, 0, 0.4));
+}
+.hero__phone .obj__ground {
+  inset: 3% -3% -3% 2%;
+  filter: blur(5px);
+}
+
+/* ==========================================================================
+   Mobile — a different composition, not a smaller one.
+   The desk becomes a vertical column: type first, objects framing it.
+   ========================================================================== */
+@media (max-width: 767px) {
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding: 5.5rem 0 4.5rem;
+  }
+
+  /* The scene stops being an overlay and becomes part of the flow, so the
+     type can grow the section instead of being clipped by it. Objects still
+     position absolutely — against .hero, which is the positioned ancestor. */
+  .hero__scene {
+    position: static;
+    width: 100%;
+  }
+
+  .hero__type {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    padding: 0 var(--gutter);
+  }
+
+  .hero__sheet {
+    width: 118vw;
+    left: -22%;
+    top: 34%;
+    aspect-ratio: 420 / 297;
+    opacity: 0.92;
+  }
+
+  .hero__last {
+    margin-left: clamp(1rem, 14vw, 4rem);
+  }
+
+  .hero__statement {
+    gap: 0.24rem;
+  }
+  .hero__line {
+    font-size: clamp(0.82rem, 4.1vw, 1.15rem);
+  }
+
+  .hero__meta {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+  }
+  .hero__sticky {
+    width: 8rem;
+    margin-left: 30%;
+  }
+  .hero__hi {
+    margin-left: -40%;
+  }
+
+  .hero__note--a,
+  .hero__note--d,
+  .hero__arrow {
+    display: none;
+  }
+  .hero__note--c {
+    left: var(--gutter);
+    bottom: 3.2rem;
+  }
+  .hero__note--b {
+    right: var(--gutter);
+    bottom: 3.2rem;
+  }
+
+  .hero__scroll {
+    bottom: 0.8rem;
+    right: 50%;
+    transform: translateX(50%);
+  }
+  .hero__type {
+    bottom: auto;
+  }
+  .hero__scroll-track {
+    height: 24px;
+  }
+  .hero__egg {
+    bottom: 4.4rem;
+    width: max-content;
+    max-width: 90vw;
+  }
+  .hero__egg-chip {
+    font-size: 0.56rem;
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+/* very small phones — stop the name card from forcing overflow */
+@media (max-width: 359px) {
+  .hero__name-card {
+    font-size: 2.5rem;
+  }
+  .hero__line {
+    font-size: 0.78rem;
+  }
+}

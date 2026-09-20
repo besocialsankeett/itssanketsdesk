@@ -1,0 +1,242 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  pointer-events: none;
+  padding: clamp(0.85rem, 2vw, 1.6rem) var(--gutter);
+  display: flex;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   The card (desktop / tablet)
+   ========================================================================== */
+.nav__card {
+  pointer-events: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: clamp(0.9rem, 2.2vw, 2rem);
+  padding: 0.5rem 1.1rem 0.5rem 0.6rem;
+  transform: rotate(-0.9deg);
+  background: linear-gradient(168deg, #fbf8f0 0%, var(--paper) 60%, var(--paper-warm) 100%);
+  box-shadow: var(--sh-card);
+  border-radius: 1px;
+}
+.nav__card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain-url);
+  opacity: 0.055;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.nav__tape {
+  width: 54px;
+  height: 20px;
+  top: -10px;
+}
+.nav__tape--l {
+  left: -14px;
+  transform: rotate(-24deg);
+}
+.nav__tape--r {
+  right: -14px;
+  transform: rotate(19deg);
+}
+
+/* --- monogram ------------------------------------------------------------ */
+.nav__mark {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.3rem 0.6rem;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 1px;
+}
+.nav__mark-initials {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 0.95rem;
+  letter-spacing: -0.03em;
+}
+.nav__mark-sub {
+  color: var(--yellow);
+}
+
+/* --- links --------------------------------------------------------------- */
+.nav__links ul {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.7rem, 1.8vw, 1.6rem);
+}
+
+.nav__link {
+  position: relative;
+  display: block;
+  padding: 0.25rem 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--track-label);
+  color: var(--ink-soft);
+  transition: color var(--dur-fast) ease;
+}
+.nav__link::after {
+  /* hand-drawn underline, drawn on hover */
+  content: '';
+  position: absolute;
+  left: -3px;
+  right: -3px;
+  bottom: -1px;
+  height: 5px;
+  background: no-repeat center/100% 100%
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 6' preserveAspectRatio='none'%3E%3Cpath d='M1 4.2C18 1.8 38 1.2 58 2.4c14 .9 27 2.4 41 1' stroke='%23E4462F' stroke-width='2.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.3s var(--ease-drop);
+}
+.nav__link:hover,
+.nav__link:focus-visible,
+.nav__link.is-active {
+  color: var(--ink);
+}
+.nav__link:hover::after,
+.nav__link:focus-visible::after,
+.nav__link.is-active::after {
+  transform: scaleX(1);
+}
+
+/* --- status -------------------------------------------------------------- */
+.nav__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+.nav__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #1f9e5f;
+  flex: none;
+}
+
+/* ==========================================================================
+   Mobile
+   ========================================================================== */
+.nav__tab {
+  display: none;
+  pointer-events: auto;
+  position: relative;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.95rem;
+  background:
+    repeating-linear-gradient(90deg, var(--cardboard-flute) 0 1px, transparent 1px 7px),
+    linear-gradient(160deg, #d6af7c, var(--cardboard-mid));
+  color: #40290b;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--track-label);
+  box-shadow: var(--sh-cardboard);
+  transform: rotate(-1.4deg);
+  border-radius: 1px;
+}
+
+.nav__tab-lines {
+  display: grid;
+  gap: 4px;
+  width: 16px;
+}
+.nav__tab-lines i {
+  display: block;
+  height: 2px;
+  background: currentColor;
+  transition: transform 0.28s var(--ease-snap);
+}
+.nav__tab.is-open .nav__tab-lines i:first-child {
+  transform: translateY(3px) rotate(42deg);
+}
+.nav__tab.is-open .nav__tab-lines i:last-child {
+  transform: translateY(-3px) rotate(-42deg);
+}
+
+.nav__sheet {
+  display: none;
+  pointer-events: auto;
+  position: fixed;
+  inset: 0;
+  padding: 5.5rem var(--gutter) 2rem;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.4rem;
+}
+.nav__sheet.is-open {
+  display: flex;
+  animation: sheet-in 0.42s var(--ease-drop) both;
+}
+
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.nav__sheet-head,
+.nav__sheet-foot {
+  color: var(--ink-faint);
+}
+
+.nav__sheet-list {
+  display: grid;
+  gap: 0.15rem;
+  border-top: 1px solid rgba(22, 21, 26, 0.15);
+}
+.nav__sheet-list li {
+  border-bottom: 1px solid rgba(22, 21, 26, 0.15);
+}
+.nav__sheet-list a {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  padding: 0.7rem 0;
+}
+.nav__sheet-n {
+  color: var(--red);
+}
+.nav__sheet-label {
+  font-family: var(--font-display);
+  font-weight: 900;
+}
+
+@media (max-width: 767px) {
+  .nav {
+    justify-content: flex-end;
+  }
+  .nav__card {
+    display: none;
+  }
+  .nav__tab {
+    display: inline-flex;
+  }
+}
+
+/* Tablet: drop the status line so the card does not crowd the corner */
+@media (max-width: 900px) and (min-width: 768px) {
+  .nav__status {
+    display: none;
+  }
+}

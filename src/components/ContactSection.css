@@ -1,0 +1,236 @@
+.contact {
+  position: relative;
+  z-index: 2;
+  padding-block: clamp(4rem, 11vw, 9rem);
+  /* the ruler and earphones hang past the bottom edge and tuck under the
+     footer (z 3) rather than being sliced; the body clips horizontal bleed */
+  overflow: visible;
+}
+
+.contact__desk {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.contact__inner {
+  position: relative;
+  z-index: 10;
+}
+
+/* ---------- the sheet ----------------------------------------------------- */
+.contact__sheet {
+  position: relative;
+  max-width: 56rem;
+  margin-inline: auto;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.3rem, 4vw, 3.6rem) clamp(2rem, 4vw, 3rem);
+  transform: rotate(-0.6deg);
+  box-shadow: var(--sh-lifted);
+}
+
+.contact__tape {
+  width: 96px;
+  height: 28px;
+  top: -14px;
+}
+.contact__tape--l {
+  left: 7%;
+  transform: rotate(-7deg);
+}
+.contact__tape--r {
+  right: 7%;
+  transform: rotate(6deg);
+}
+
+.contact__eyebrow {
+  color: var(--red);
+  margin-bottom: 1.2rem;
+}
+
+.contact__heading {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2rem, 7vw, 5.2rem);
+  line-height: 0.87;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 1.3rem;
+}
+
+.contact__weird {
+  position: relative;
+  display: inline-block;
+  color: var(--red);
+  transform: rotate(-2.4deg);
+}
+.contact__weird::after {
+  content: '';
+  position: absolute;
+  left: -1%;
+  right: -1%;
+  bottom: 0.04em;
+  height: 0.16em;
+  background: var(--yellow);
+  z-index: -1;
+}
+
+.contact__body {
+  max-width: 36rem;
+  font-size: var(--fs-md);
+  line-height: 1.62;
+  color: var(--ink-soft);
+  margin-bottom: clamp(1.6rem, 4vw, 2.6rem);
+}
+
+/* ---------- cardboard CTA -------------------------------------------------- */
+.contact__cta {
+  position: relative;
+  display: inline-block;
+  margin-bottom: clamp(2rem, 5vw, 3.2rem);
+  transform: rotate(-1.4deg);
+  transition: transform 0.35s var(--ease-drop);
+}
+.contact__cta:hover,
+.contact__cta:focus-visible {
+  transform: rotate(0.6deg) translateY(-3px);
+}
+
+.contact__cta-face {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.6rem;
+  background:
+    repeating-linear-gradient(90deg, var(--cardboard-flute) 0 1px, transparent 1px 7px),
+    linear-gradient(163deg, #d9b481 0%, var(--cardboard) 42%, var(--cardboard-mid) 100%);
+  color: #3d2708;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(0.95rem, 2vw, 1.4rem);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  box-shadow: var(--sh-cardboard);
+  clip-path: polygon(0.5% 3%, 99.5% 0, 100% 96%, 1% 100%);
+}
+.contact__cta-arrow {
+  transition: transform 0.35s var(--ease-drop);
+}
+.contact__cta:hover .contact__cta-arrow {
+  transform: translateX(6px);
+}
+
+.contact__cta-flute {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  bottom: -6px;
+  height: 6px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--cardboard-dark) 0 2px,
+    var(--cardboard-edge) 2px 3px,
+    var(--cardboard-mid) 3px 6px
+  );
+}
+
+/* ---------- links ---------------------------------------------------------- */
+.contact__links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border-top: 2px solid rgba(22, 21, 26, 0.85);
+  margin-bottom: clamp(1.8rem, 4vw, 2.6rem);
+}
+
+.contact__link a {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    'label arrow'
+    'value arrow'
+    'note  arrow';
+  align-items: center;
+  gap: 0.15rem 1rem;
+  padding: 1rem 0.9rem 1rem 0;
+  border-bottom: 1px solid rgba(22, 21, 26, 0.16);
+  transition: background-color 0.3s ease, padding-left 0.3s var(--ease-drop);
+}
+.contact__link a:hover,
+.contact__link a:focus-visible {
+  background: rgba(255, 210, 48, 0.28);
+  padding-left: 0.85rem;
+}
+
+.contact__link-label {
+  grid-area: label;
+  color: var(--red);
+}
+.contact__link-value {
+  grid-area: value;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(0.9rem, 1.55vw, 1.15rem);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  word-break: break-word;
+}
+.contact__link-note {
+  grid-area: note;
+  color: var(--ink-faint);
+  text-transform: none;
+  letter-spacing: 0.06em;
+}
+.contact__link-arrow {
+  grid-area: arrow;
+  font-size: 1.1rem;
+  color: var(--ink-faint);
+  transition: transform 0.3s var(--ease-drop), color 0.3s ease;
+}
+.contact__link a:hover .contact__link-arrow {
+  transform: translate(3px, -3px);
+  color: var(--ink);
+}
+
+/* ---------- signature ------------------------------------------------------ */
+.contact__sign {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 0.9rem;
+  padding-top: 1.2rem;
+  border-top: 1px dashed rgba(22, 21, 26, 0.3);
+  color: var(--ink-faint);
+}
+.contact__sign-name {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1rem, 2.4vw, 1.6rem);
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+/* ---------- responsive ------------------------------------------------------ */
+@media (max-width: 640px) {
+  .contact__sheet {
+    transform: none;
+  }
+  .contact__links {
+    grid-template-columns: 1fr;
+  }
+  .contact__cta {
+    display: block;
+    transform: none;
+  }
+  .contact__cta-face {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .contact__link a {
+    padding-right: 0.4rem;
+  }
+}
