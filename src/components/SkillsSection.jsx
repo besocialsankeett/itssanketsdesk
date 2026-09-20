@@ -2,6 +2,7 @@ import { useCallback, useLayoutEffect, useRef, useState } from 'react'
 import { gsap } from '../lib/gsap'
 import { useStillMode } from '../hooks/useStillMode'
 import CardboardLabel from './CardboardLabel'
+import PhotoObject from './PhotoObject'
 import './SkillsSection.css'
 
 /* ==========================================================================
@@ -95,14 +96,8 @@ export default function SkillsSection() {
           <div className="tc__deck">
           {/* ---------- the pack it came in ------------------------------- */}
           <div className="tc__pack" aria-hidden="true">
-            <span className="tc__pack-tear" />
-            <span className="tc__pack-brand">
-              <b>SA DESK</b>
-              <i>TRADING CARDS</i>
-            </span>
-            <span className="tc__pack-series">SERIES 04 · INVENTORY</span>
-            <span className="tc__pack-note">1 CARD PER PACK · NO GUM</span>
-            <span className="tc__pack-star">★ RARE</span>
+            <span className="tc__pack-ground" />
+            <PhotoObject name="pack" width={783} height={1165} />
           </div>
 
           {/* ---------- the card -------------------------------------------- */}
@@ -123,7 +118,7 @@ export default function SkillsSection() {
                 {/* ----- front ----- */}
                 <span className="tc__face tc__face--front">
                   <span className="tc__top">
-                    <b className="tc__name">SANKET ATHAWALE</b>
+                    <b className="tc__name">ROOKIE</b>
                     <i className="tc__no">NO. 01 / 01</i>
                   </span>
                   <span className="tc__art">
@@ -191,18 +186,21 @@ export default function SkillsSection() {
               <br />
               I’M SANKET.
             </p>
-            <p>I’m a creative who likes turning ideas into things people actually want to stop and look at.</p>
             <p>
-              I work across content, social media, video and visual design — writing, shooting, editing,
-              and figuring things out along the way.
+              I have a habit of turning random thoughts into projects. Some of them even make it past the
+              “this could be cool” stage.
             </p>
             <p>
-              A lot of my creativity comes from people — talking, storytelling, meeting new people and
-              understanding how they see the world.
+              I work across content, social, video and visual design — writing, shooting, editing,
+              designing, and occasionally staring at a blank screen until it becomes a personality crisis.
             </p>
             <p>
-              Outside of work, you’ll probably find me drawing, dancing, cooking, doing calisthenics,
-              making DIY stuff, or chasing some random hobby.
+              People are a big part of how I work. I like conversations, stories, different perspectives,
+              and figuring out why people see things the way they do.
+            </p>
+            <p>
+              When I’m not working, I’m probably drawing, dancing, cooking, doing calisthenics, building
+              something I absolutely could’ve bought, or getting unnecessarily invested in a new hobby.
             </p>
             <span className="tc__intro-sign" aria-hidden="true">
               — S.A.

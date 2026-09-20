@@ -35,7 +35,7 @@ const SPREADS = [
     title: 'EDITING',
     note: 'Short-form video, visual storytelling, pacing. Cutting until only the part worth keeping is left.',
     /* the reels live on Instagram — a taped note points there instead of a fake still */
-    sticky: { head: 'THE REELS LIVE HERE →', lines: ['@social.sankeett', 'Bibliophiles · UGC · product'], href: contact.links[1].href },
+    sticky: { head: 'THE REELS LIVE HERE →', lines: ['@social.sankeett', 'Storytelling · Editing · Perspective'], href: contact.links[1].href },
     cap: 'SCRIPTED, SHOT, CUT — CAPCUT, MOSTLY AT NIGHT',
     tab: '#2f6b57',
   },

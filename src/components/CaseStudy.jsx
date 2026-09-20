@@ -346,6 +346,10 @@ export default function CaseStudy({ project, onClose, onNavigate, lenisRef }) {
       role="dialog"
       aria-modal="true"
       aria-labelledby="cs-title"
+      // Lenis is stopped while the folder is open, and a stopped Lenis still
+      // swallows every wheel event — this tells it to leave the folder alone
+      // so its own scroll container gets the wheel / trackpad
+      data-lenis-prevent
     >
       <button
         type="button"

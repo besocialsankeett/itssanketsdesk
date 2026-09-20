@@ -24,8 +24,8 @@ export const contact = {
     {
       id: 'linkedin',
       label: 'LINKEDIN',
-      value: '/in/sanket-athawale',
-      href: 'https://www.linkedin.com/in/sanket-athawale/',
+      value: '/in/sanket-athawale-2b4629249',
+      href: 'https://www.linkedin.com/in/sanket-athawale-2b4629249/',
       note: 'the tidy version of me',
     },
     {

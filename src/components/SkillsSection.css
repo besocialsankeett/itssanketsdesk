@@ -425,107 +425,36 @@
   color: rgba(233, 255, 244, 0.5);
 }
 
-/* ---------- the foil pack ------------------------------------------------------------- */
+/* ---------- the foil pack (photo, background removed) --------------------------------- */
 .tc__pack {
   position: relative;
   z-index: 1;
   order: 2;
-  width: calc(var(--w) * 0.8);
-  aspect-ratio: 63 / 98;
-  container-type: inline-size;
-  margin-left: calc(var(--w) * -0.12);
-  margin-top: calc(var(--w) * 0.22);
+  /* a real pack is a touch bigger than the card it holds */
+  width: calc(var(--w) * 1.04);
+  margin-left: calc(var(--w) * -0.2);
+  margin-top: calc(var(--w) * 0.12);
   transform: rotate(7deg);
-  border-radius: 3cqw;
-  /* crimped foil: cool silver with a couple of hard highlight bands */
-  background:
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.06) 0 2px, transparent 2px 9px),
-    linear-gradient(
-      128deg,
-      #cfd2d8 0%,
-      #f7f8fb 16%,
-      #a5a9b3 34%,
-      #e3e5ea 48%,
-      #8b8f99 64%,
-      #eef0f3 80%,
-      #b4b8c1 100%
-    );
-  /* torn open across the top */
-  clip-path: polygon(
-    0 5.5%, 3% 4%, 7% 6.5%, 10% 3.5%, 15% 6%, 19% 4.5%, 24% 7.5%, 28% 3%, 33% 5.5%, 38% 4%,
-    43% 7%, 47% 4.5%, 52% 6%, 57% 2.5%, 62% 6.5%, 67% 4%, 72% 7%, 77% 5%, 82% 3%, 87% 6.5%,
-    92% 4%, 96% 6%, 100% 4.5%, 100% 100%, 0 100%
-  );
-  filter: drop-shadow(0 2px 2px rgba(20, 14, 6, 0.25)) drop-shadow(6px 14px 22px rgba(3, 14, 9, 0.4));
   pointer-events: none;
 }
-/* the dark inside of the pack showing through the tear */
-.tc__pack-tear {
+.tc__pack .photo-obj {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  z-index: 1;
+  /* the same soft key light the other objects sit under */
+  filter: drop-shadow(0 1px 1px rgba(20, 14, 6, 0.3)) drop-shadow(5px 12px 18px rgba(3, 14, 9, 0.38));
+}
+.tc__pack-ground {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 10%;
-  background: linear-gradient(180deg, #1a1b1f 0%, #2a2b30 55%, transparent 100%);
-  opacity: 0.85;
-}
-.tc__pack-brand {
-  position: absolute;
-  left: -6%;
-  right: -6%;
-  top: 34%;
-  padding: 3cqw 8cqw;
-  display: grid;
-  gap: 1cqw;
-  background: var(--red);
-  color: #fff;
-  transform: rotate(-6deg);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-}
-.tc__pack-brand b {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 12cqw;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-}
-.tc__pack-brand i {
-  font-family: var(--font-mono);
-  font-style: normal;
-  font-size: 3.4cqw;
-  letter-spacing: 0.22em;
-  opacity: 0.85;
-}
-.tc__pack-series,
-.tc__pack-note {
-  position: absolute;
-  left: 8%;
-  font-family: var(--font-mono);
-  font-size: 3.2cqw;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  color: #2a2b30;
-}
-.tc__pack-series {
-  top: 20%;
-}
-.tc__pack-note {
-  bottom: 7%;
-}
-.tc__pack-star {
-  position: absolute;
-  right: 7%;
-  bottom: 15%;
-  padding: 2cqw 3.6cqw;
-  background: var(--yellow);
-  color: #3a2c00;
-  font-family: var(--font-mono);
-  font-size: 3.8cqw;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  border-radius: 999px;
-  transform: rotate(-8deg);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  left: 4%;
+  right: -2%;
+  top: 8%;
+  bottom: -4%;
+  background: radial-gradient(60% 55% at 50% 58%, rgba(3, 14, 9, 0.5), transparent 72%);
+  filter: blur(14px);
+  z-index: 0;
 }
 
 /* ==========================================================================
@@ -560,7 +489,7 @@
     top: 0;
     right: 4%;
     order: 0;
-    width: calc(var(--w) * 0.62);
+    width: calc(var(--w) * 0.78);
     margin: 0;
     transform: rotate(12deg);
     z-index: 0;
